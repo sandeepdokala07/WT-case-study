@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Color Generator</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #5a94db, #d47ebd);
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 350px;
+        }
+
+        h2 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        .color-box {
+            background: #548714;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button {
+            background: #f1f1f1;
+            border: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ddd;
+        }
+
+        .dark-mode {
+            background: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>GeeksforGeeks Random Color Generator</h2>
+        <div class="color-box" id="colorBox">
+            <p id="hexCode">#548714</p>
+            <p id="rgbCode">RGB(84, 135, 20)</p>
+        </div>
+        <div class="buttons">
+            <button onclick="generateColor()">🔄 Generate Color</button>
+            <button onclick="copyToClipboard('hex')">📋 Copy HEX</button>
+            <button onclick="copyToClipboard('rgb')">📋 Copy RGB</button>
+            <button onclick="toggleDarkMode()">⚫ Dark Mode</button>
+        </div>
+    </div>
+
+    <script>
+        function generateColor() {
+            let r = Math.floor(Math.random() * 256);
+            let g = Math.floor(Math.random() * 256);
+            let b = Math.floor(Math.random() * 256);
+            let hex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+            let rgb = `RGB(${r}, ${g}, ${b})`;
+
+            document.getElementById("colorBox").style.background = hex;
+            document.getElementById("hexCode").innerText = hex;
+            document.getElementById("rgbCode").innerText = rgb;
+        }
+
+        function copyToClipboard(type) {
+            let text = type === 'hex' ? document.getElementById("hexCode").innerText : document.getElementById("rgbCode").innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert(type.toUpperCase() + " Copied: " + text);
+            });
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+    </script>
+
+</body>
+</html>
